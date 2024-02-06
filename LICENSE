@@ -1,21 +1,32 @@
-MIT License
+# License and Other Legal Stuff
 
-Copyright (c) 2024 Gusztáv Jánvári
+## Copyright
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This add-on has been created by [T1nk-R (https://github.com/gusztavj/)](https://github.com/gusztavj/).
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## MIT License
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Copyright (c) 2023-2024, T1nk-R (Gusztáv Jánvári)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Commercial Use
+
+I would highly appreciate to get notified via [janvari.gusztav@imprestige.biz](mailto:janvari.gusztav@imprestige.biz) about any such usage. I would be happy to learn this work is of your interest, and to discuss options for commercial support and other services you may need.
+
+## Disclaimer
+
+This add-on is provided as-is. Use at your own risk. No warranties, no guarantee, no liability, no matter what happens. Still I tried to make sure no weird things happen:
+
+* This module is intended to check a GitHub repository of your choice to get information on the latest published version of whatever is contained in the given repository.
+* **CAUTION.** This module requires an access token to the GitHub repository. The token is stored as clean text.
+  * Make sure to create a personal token restricted to only access the repos you want everyone to be able to access restricted to access code only restricted to only read code.
+  * Note that your personal token expires in a year (or sooner if you decided so). Update check won't work afterwards. To not  disturb your users, such errors are ignored silently. Make sure to change the code and update the token to a newer one before the current expires.
+* **CAUTION.** When people use your add-on using this module, they can generate many requests against your repo, and your GitHub rate limit may be exceeded. To overcome this, be sure to set a proper frequency, but don't forget, users will have access to your source code and may change it.
+* This template assumes you use [semantic versioning](http://semver.org/) for your add-on. See [Release Tagging Rules](/README.md#release-tagging-rules) for more information.
+
+You may learn more about legal matters on page [https://github.com/gusztavj/Blender-Add-On-GitHub-Update-Checker](https://github.com/gusztavj/Blender-Add-On-GitHub-Update-Checker).
