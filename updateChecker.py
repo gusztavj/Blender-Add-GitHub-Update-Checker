@@ -173,7 +173,7 @@ class AUTHORPREFIX_OT_ADDONNAMEUpdateChecker(Operator):
     bl_options = {'REGISTER', 'UNDO'}    
     
     # Other properties ------------------------------------------------------------------------------------------------------------
-    forceUpdateCheck = BoolProperty(default = False)
+    forceUpdateCheck: BoolProperty(default = False)
     """
     Whether to force update check. Use only for testing. Once the operator is called,
     this is set back to False to prevent accidental flooding of GitHub.
