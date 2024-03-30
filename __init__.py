@@ -63,6 +63,28 @@ bl_info = {
 
 # Lifecycle management ############################################################################################################
 
+# Unregister the plugin -----------------------------------------------------------------------------------------------------------
+def unregister():
+    """
+    Delete/unregister what has once been registered, such as menus, hotkeys, classes and so on.
+    """
+
+    # Exception are suppressed as we can't do much in case of failure, it's superfluous to annoy the user.
+    # In addition, the function is performed as part of the registration to clean up previous leftovers,
+    # and in this scenario all operations below shall fail (in a clean state, none of the objects shall exist).
+    with contextlib.suppress(Exception):
+        
+        # Try to delete add-on setting. Don't panic in case of failure, it was probably not registered
+        with contextlib.suppress(Exception):
+            del bpy.types.Scene.T1nkerUpdateCheckerForBlenderAddOnsSettings
+        
+
+        # Unregister classes (in reverse order)
+        for c in reversed(classes):
+            # Don't panic in case of failure, it was probably not registered
+            with contextlib.suppress(Exception):
+                bpy.utils.unregister_class(c)
+                
 # Reload each module to make sure everything is up to date ========================================================================
 if "bpy" in locals():
     unregister()
@@ -118,27 +140,7 @@ def register():
     bpy.types.Scene.T1nkerUpdateCheckerForBlenderAddOnsSettings = bpy.props.PointerProperty(type=updateChecker.T1nkrUpdateCheckingInfo)
     
 
-# Unregister the plugin -----------------------------------------------------------------------------------------------------------
-def unregister():
-    """
-    Delete/unregister what has once been registered, such as menus, hotkeys, classes and so on.
-    """
 
-    # Exception are suppressed as we can't do much in case of failure, it's superfluous to annoy the user.
-    # In addition, the function is performed as part of the registration to clean up previous leftovers,
-    # and in this scenario all operations below shall fail (in a clean state, none of the objects shall exist).
-    with contextlib.suppress(Exception):
-        
-        # Try to delete add-on setting. Don't panic in case of failure, it was probably not registered
-        with contextlib.suppress(Exception):
-            del bpy.types.Scene.T1nkerUpdateCheckerForBlenderAddOnsSettings
-        
-
-        # Unregister classes (in reverse order)
-        for c in reversed(classes):
-            # Don't panic in case of failure, it was probably not registered
-            with contextlib.suppress(Exception):
-                bpy.utils.unregister_class(c)
                 
                 
 # Developer mode ##################################################################################################################

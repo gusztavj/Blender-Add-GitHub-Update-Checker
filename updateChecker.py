@@ -147,7 +147,8 @@ class UpdateChecker:
     
     # Check for updates ------------------------------------------------------------------------------------------------------------                
     def checkForUpdates(self, updateInfo: T1nkrUpdateCheckingInfo):
-                
+        print(f"{self._addOnName}: Trying to check for updates. Checking on the proxy is {'forced' if self.forceUpdateCheck else 'not forced'}.")
+            
         # Check cache expiry only if update check is not forced
         if not self.forceUpdateCheck:            
             # Check if update check shall be performed based on frequency
@@ -161,7 +162,7 @@ class UpdateChecker:
         requestTimeoutSec = 5
 
         try: # if anything goes wrong we silently fail, no need to perform double-checks
-            print(f"{self._addOnName}: Trying to check for updates")
+            print(f"{self._addOnName}: Trying to check for updates on proxy")
             
             # Get installed version (already stored as a list by Blender)
 
@@ -184,7 +185,7 @@ class UpdateChecker:
 
             updateInfo.latestVersionName = repoInfo["latestVersionName"]
             updateInfo.latestVersion = repoInfo["latestVersion"]                        
-            updateInfo.releasesUrl = repoInfo["releaseUrl"]
+            updateInfo.repoReleasesUrl = repoInfo["releaseUrl"]
             updateInfo.repoUrl = repoInfo["repoUrl"]
             updateInfo.updateAvailable = response.json()["updateAvailable"]
 
@@ -362,7 +363,7 @@ class T1NKER_OT_UpdateCheckerForBlenderAddOns(Operator):
     
     # Public functions ============================================================================================================
     
-    @staticmethod
+    @classmethod
     def drawUpdateAvailableUI(context: Context, addOnName: str, layout: UILayout, showForceOption: bool = False) -> UILayout:
         # Update available button
         #
@@ -395,7 +396,8 @@ class T1NKER_OT_UpdateCheckerForBlenderAddOns(Operator):
                 opCheck.gitHubRepoSlug = updateInfo.gitHubRepoSlug
                 opCheck.updateCheckerProxyUrl = updateInfo.updateCheckerProxyUrl                
                 opCheck.addOnName = addOnName
-                
+                updateInfo.forceUpdateCheck = True
+                #opCheck.forceUpdateCheck = True
                 
                 box.row().label(text=f"You can update from v{updateInfo.currentVersion} to {updateInfo.latestVersion}")
             else:
@@ -410,7 +412,9 @@ class T1NKER_OT_UpdateCheckerForBlenderAddOns(Operator):
                 opCheck.gitHubUserName = updateInfo.gitHubUserName 
                 opCheck.gitHubRepoSlug = updateInfo.gitHubRepoSlug
                 opCheck.updateCheckerProxyUrl = updateInfo.updateCheckerProxyUrl
-                opCheck.addOnName = addOnName                
+                opCheck.addOnName = addOnName    
+                
+                            
         except Exception as ex: 
             print(ex)
             # Do nothing, if we could not check updates, probably this is the first time of enabling the add-on
@@ -419,7 +423,7 @@ class T1NKER_OT_UpdateCheckerForBlenderAddOns(Operator):
         
         return layout
         
-    @staticmethod
+    @classmethod
     def drawUpdateCheckingAndHelpUI(context: Context, addOnName: str, layout: UILayout) -> UILayout:   
         
         updateInfo: T1nkrUpdateCheckingInfo = context.preferences.addons[addOnName].preferences.updateInfo
@@ -501,7 +505,7 @@ class T1NKER_OT_UpdateCheckerForBlenderAddOns(Operator):
                 repoSlug=self.gitHubRepoSlug, 
                 proxyApiRootAddress=self.updateCheckerProxyUrl
             )
-            
+                        
             uc.forceUpdateCheck = updateInfo.forceUpdateCheck
                     
             # Check for updates by passing known update info
